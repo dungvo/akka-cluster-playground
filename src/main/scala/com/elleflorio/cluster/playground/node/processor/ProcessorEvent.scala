@@ -1,6 +1,7 @@
 package com.elleflorio.cluster.playground.node.processor
 
 import akka.actor.{Actor, ActorRef, Props}
+import com.pobble.kafka.producer.Producer
 
 object ProcessorEvent {
   sealed trait ProcessorEventMessage
@@ -10,6 +11,7 @@ object ProcessorEvent {
 
   def process(x: String) = {
     println(x)
+    Producer.writeToKafka("test", x)
   }
 }
 

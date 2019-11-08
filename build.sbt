@@ -10,6 +10,7 @@ resolvers ++= Seq(
 
 lazy val akkaVersion = "2.5.19"
 lazy val akkaHttpVersion = "10.1.5"
+lazy val kafkaVersion = "2.3.1"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
@@ -17,7 +18,10 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
-  "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion
+  "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
+  //"org.apache.kafka"  %% "kafka" % kafkaVersion,
+  "org.apache.kafka"  % "kafka-clients" % kafkaVersion,
+  "org.json4s"        %% "json4s-native" % "3.7.0-M1"
 )
 
 enablePlugins(JavaAppPackaging)
