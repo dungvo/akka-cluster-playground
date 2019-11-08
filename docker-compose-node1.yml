@@ -1,0 +1,22 @@
+version: '3.5'
+
+networks:
+  cluster-network:
+
+services:
+  
+
+  node1:
+    networks:
+      - cluster-network
+    image: elleflorio/akka-cluster-playground
+    ports:
+      - '8001:8000'
+    environment:
+      SERVER_IP: 0.0.0.0
+      CLUSTER_IP: node1
+      CLUSTER_PORT: 1600
+      CLUSTER_SEED_IP: seed
+      CLUSTER_SEED_PORT: 2552
+
+  

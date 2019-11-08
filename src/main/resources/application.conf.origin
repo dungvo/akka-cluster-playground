@@ -37,7 +37,7 @@ clustering {
   ip = "127.0.0.1"
   ip = ${?CLUSTER_IP}
 
-  port = 1600
+  port = 2552
   port = ${?CLUSTER_PORT}
 
   seed-ip = "127.0.0.1"

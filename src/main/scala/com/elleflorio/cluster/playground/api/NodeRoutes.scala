@@ -10,7 +10,7 @@ import akka.util.Timeout
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.elleflorio.cluster.playground.node.processor.ProcessorResponseJsonProtocol._
-import com.elleflorio.cluster.playground.node.Node.{GetClusterMembers, GetFibonacci}
+import com.elleflorio.cluster.playground.node.Node.{GetClusterMembers, GetFibonacci, PostEvent}
 import com.elleflorio.cluster.playground.node.processor.ProcessorResponse
 
 import scala.concurrent.Future
@@ -72,6 +72,26 @@ trait NodeRoutes extends SprayJsonSupport {
             }
           }
         )
+      },
+      pathPrefix("event") {
+        concat {
+          pathEnd {
+            concat(
+              post {
+                //println(node)
+                //print(PostEvent("entity"))
+                //(node ? PostEvent("1"))
+                //complete(StatusCodes.Created)
+                entity(as[String]) { entity =>
+                  val processFuture: Future[ProcessorResponse] = (node ? PostEvent(entity)).mapTo[ProcessorResponse]
+                  onSuccess(processFuture) { response =>
+                    complete(StatusCodes.OK, response)
+                  }
+                }
+              }
+            )
+          }
+        }
       }
     )
   }
